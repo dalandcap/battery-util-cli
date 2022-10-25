@@ -1,0 +1,21 @@
+{
+  "name": "battery-util-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "serve": "ts-node ./src",
+    "start": "node ./dist"
+  },
+  "author": "dalandcap",
+  "license": "ISC",
+  "dependencies": {
+    "battery-level": "^3.0.0",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.5",
+    "ts-node": "^10.9.1"
+  }
+}
