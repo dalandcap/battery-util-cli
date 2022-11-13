@@ -1,14 +1,18 @@
-const batteryLevel = require('battery-level');
+import batteryLevel from 'battery-level';
+import { db, getStats } from './db';
 
 interface BatteryLog {
   time: unknown;
   level: number;
 }
 
-const FIVE_MINUTES_IN_MILLISECONDS = 1000 * 60;
+const ONE_MINUTE_IN_MILLISECONDS = 1000 * 60;
+
+setTimeout(() => getStats(db), 100);
 
 let batteryLogs: BatteryLog[] = [];
 
+// TODO: this should actually save logs in DB
 const logBattery = () =>
   console.log(
     batteryLevel().then((level: number) => {
@@ -17,4 +21,4 @@ const logBattery = () =>
     })
   );
 
-setInterval(logBattery, FIVE_MINUTES_IN_MILLISECONDS);
+setInterval(logBattery, ONE_MINUTE_IN_MILLISECONDS);
