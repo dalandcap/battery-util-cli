@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="b48bfabb-922e-4644-b2d0-9fdf09733df7" name="battery.db Mapping">
+      <data-sources db="0d2bef18-ed65-4ea2-aded-c50f19ce8d18" ddl="c62d1137-b64e-4e5c-8a04-98bb6e2994ca" />
+      <scope>
+        <node kind="schema" qname="main" />
+      </scope>
+    </mapping>
+  </component>
+</project>

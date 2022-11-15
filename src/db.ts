@@ -1,9 +1,9 @@
+import path from 'node:path';
 import sqlite3, { Database } from 'sqlite3';
 
 const getStats = (db: Database) => {
   db.all(
-    `
-    SELECT stat_id, battery_level, time FROM stats`,
+    `SELECT id, battery_level, time FROM stats`,
     (err, rows) => {
       if (err) console.error(err);
       else console.log(rows);
@@ -14,28 +14,23 @@ const getStats = (db: Database) => {
 const createTables = (db: Database) => {
   db.exec(
     `
-    CREATE table stats (
-        stat_id int primary key not null,
-        battery_level int not null,
-        time text not null,
-    );
-    INSERT into stats (stat_id, battery_level, time)
-        values (1, 100, '1231234'),
-            (2, 99, '21341234124);
+      CREATE TABLE IF NOT EXISTS stats (
+        id INT PRIMARY KEY NOT NULL,
+        battery_level INT NOT NULL,
+        logged_at TEXT NOT NULL
+      );
         `,
     () => {
       console.log('stats table created!');
-
-      getStats(db);
     }
   );
 };
 
-const db = new sqlite3.Database('battery.db', sqlite3.OPEN_CREATE, (error) => {
-  if (error) console.error(error);
+const db = new sqlite3.Database(path.resolve(__dirname, '../battery.db'), sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (error) => {
+  sqlite3.verbose()
+  if (error) console.error('A error occurred on database init', error);
   else {
     createTables(db);
-    console.log('DB created!');
   }
 });
 
